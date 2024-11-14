@@ -4,6 +4,7 @@ import os
 from quixstreams import Application
 from dotenv import load_dotenv
 import json
+import time
 
 load_dotenv()
 
@@ -21,6 +22,8 @@ class webSocketSource:
         self.websocket_connections = {}
         
     async def consume_messages(self):
+        commit_time = time.time()
+
         while True:
             message = self._consumer.poll(1)
             print(message)
@@ -36,6 +39,9 @@ class webSocketSource:
                         del self.websocket_connections[key]
                     print(f"Send {str(len(self.websocket_connections))} times.")
                 
+                if time.time() - commit_time > 5:
+                    self._consumer.commit(message)
+                        
                 await asyncio.sleep(0)
             else:
                 await asyncio.sleep(1)
