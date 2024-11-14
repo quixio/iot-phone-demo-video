@@ -4,4 +4,4 @@ global:
 scrape_configs:
   - job_name: 'kstream_app'
     static_configs:
-      - targets: ['<YOUR_SERVICE_NAME>:80']
+      - targets: ['counter:80']
