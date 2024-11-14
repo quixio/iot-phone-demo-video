@@ -10,7 +10,7 @@ load_dotenv()
 class webSocketSource:
 
     def __init__(self) -> None:
-        app = Application(consumer_group="heatmap-web-sockets-v3", auto_offset_reset="latest")
+        app = Application(consumer_group="heatmap-web-sockets-v4", auto_offset_reset="latest")
         self._topic = app.topic(name=os.environ["input"])
         self._events_topic = app.topic(name=os.environ["events_topic"])
         
