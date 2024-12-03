@@ -267,6 +267,30 @@ deployments:
         description: ''
         required: false
         value: http://counter:80
+  - name: Counter
+    application: counter
+    version: latest
+    deploymentType: Service
+    resources:
+      cpu: 1000
+      memory: 500
+      replicas: 1
+    network:
+      serviceName: counter
+      ports:
+        - port: 80
+          targetPort: 80
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: Name of the input topic to listen to.
+        required: false
+        value: sensor-data
+      - name: output
+        inputType: OutputTopic
+        description: Name of the output topic to write to.
+        required: false
+        value: count
 
 # This section describes the Topics of the data pipeline
 topics:
